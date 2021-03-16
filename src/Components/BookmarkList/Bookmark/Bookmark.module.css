@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+}
+
+._Bookmark{
+    margin: 3rem auto;
+    border: 2px solid grey;
+    border-radius: 15px;
+    max-width: 50%;
+}
+._Link h3{
+    margin: 0;
+    padding: 0.5rem;
+}
+._Link:hover{
+    cursor: pointer;
+}
+
+._Url{
+    margin: 0;
+    display: flex;
+    padding-bottom: 0.4rem;
+    padding:0.5rem;
+}
+
+._Url h5{
+    margin: 0;
+    padding-top: 0.2rem;
+    width: 100%;
+}
+
+._Url ._copyBtn{
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+._Tab:hover{
+    cursor: pointer;
+}
+
+._Desc{ 
+    border-top: 1px solid grey;
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+._Buttons{
+    display: flex;
+}
+
+._editBtn{
+    margin-left: 2rem;
+    margin-right: auto !important;
+    margin-bottom: 0.1rem;
+}
+
+._deleteBtn{
+    margin-right: 2rem;
+    margin-left: auto !important;
+    margin-bottom: 0.1rem;
+}
