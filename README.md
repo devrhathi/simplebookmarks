@@ -1,6 +1,6 @@
 # Tasks:
-- [ ] Provide firebase login and make login modal functional
-- [ ] Provide firebase register and make register modal functional
+- [x] Provide firebase login and make login modal functional
+- [ ] Add register functionality
 - [ ] Add New Button adds new data to firebase database
 - [ ] Show the database data in the UI using useEffect
 - [ ] Make Copy Button Functional

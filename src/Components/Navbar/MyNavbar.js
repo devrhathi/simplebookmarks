@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from 'react-bootstrap';
 import LoginModal from '../Modal/LoginModal';
+import 'firebase/auth';
+import firebase from '../../firebase';
 
 function MyNavbar(props) {
 
@@ -10,13 +12,18 @@ function MyNavbar(props) {
   function handleShow(){setLogin(true)}
   function handleClose(){setLogin(false)}
 
-  let method = "LOGIN";
-
-  function handleLogin(){
+  function handleLogin(email, pass){
     //log user in, if failed, show failed modal
+    firebase.auth().signInWithEmailAndPassword(email, pass).then((userCreds) => {
+      //Signed In
+      //refresh the page -- as of now
+      window.location.reload();
+    }).catch((err)=>{
+      alert(err.message);
+    });
   }
 
-  function handleRegister(){
+  function handleRegister(email, pass){
     //first close the login modal, then pop the register modal, similar to login modal and handle the registration of user
   }
 
