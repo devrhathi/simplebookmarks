@@ -13,11 +13,11 @@ function MyNavbar(props) {
   let method = "LOGIN";
 
   function handleLogin(){
-    
+    //log user in, if failed, show failed modal
   }
 
   function handleRegister(){
-    
+    //first close the login modal, then pop the register modal, similar to login modal and handle the registration of user
   }
 
     return (
@@ -32,11 +32,15 @@ function MyNavbar(props) {
   <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
       Signed in as: <a href="#login" onClick={handleShow}>{user ? (user.email): (<>Login</>)}</a>
+
       <LoginModal
         show={login}
         handleClose={handleClose}
         title={"Login"}
+        handleLogin={handleLogin}
+        handleRegister={handleRegister}
       />
+
     </Navbar.Text>
   </Navbar.Collapse>
 </Navbar>

@@ -24,14 +24,14 @@ function LoginModal(props) {
 
 
           <Modal.Footer>
-            <Button variant="info" onClick={props.handleClose}>
+            <Button variant="info" onClick={props.handleRegister}>
               New? Register
             </Button>
             <Button variant="secondary" onClick={props.handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={props.handleClose}>
-              Save
+            <Button variant="primary" onClick={props.handleLogin}>
+              Login
             </Button>
 
           </Modal.Footer>
