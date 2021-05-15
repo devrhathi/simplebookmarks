@@ -22,7 +22,9 @@ function App() {
       <MyNavbar
         user = {currentUser}
       />
-      <Search/>
+      <Search
+        user = {currentUser}
+      />
       <Bookmark/>
     </div>
   )

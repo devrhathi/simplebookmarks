@@ -1,7 +1,7 @@
 # Tasks:
 - [x] Provide firebase login and make login modal functional
 - [x] Add register functionality
-- [ ] Add New Button adds new data to firebase database
+- [x] Add New Button adds new data to firebase database
 - [ ] Show the database data in the UI using useEffect
 - [ ] Make Copy Button Functional
 - [ ] Make delete Button delete the bookmark from database and UI
