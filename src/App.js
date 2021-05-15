@@ -10,9 +10,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
     //check if firebase has auth
-    const user = firebase.auth().currentUser;
+    const user = localStorage.getItem('currentUser');
     if(user){
-      setCurrentUser(user);
+      setCurrentUser(JSON.parse(user));
     }
   }, [])
 
@@ -24,7 +24,6 @@ function App() {
       />
       <Search/>
       <Bookmark/>
-      {/* <BookmarkList/> */}
     </div>
   )
 }

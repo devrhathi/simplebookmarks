@@ -2,21 +2,26 @@ import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from 'react-bootstrap';
 import LoginModal from '../Modal/LoginModal';
+import RegisterModal from '../Modal/RegisterModal';
 import 'firebase/auth';
 import firebase from '../../firebase';
 
 function MyNavbar(props) {
 
   const user = props.user;
+
   const[login, setLogin] = useState(false);
-  function handleShow(){setLogin(true)}
-  function handleClose(){setLogin(false)}
+  const[register, setRegister] = useState(false);
+  function handleShow(){setLogin(true); }
+  function handleClose(){setLogin(false); setRegister(false);}
 
   function handleLogin(email, pass){
     //log user in, if failed, show failed modal
     firebase.auth().signInWithEmailAndPassword(email, pass).then((userCreds) => {
       //Signed In
       //refresh the page -- as of now
+      //put the data user in localstorage first
+      window.localStorage.setItem('currentUser', JSON.stringify(userCreds));
       window.location.reload();
     }).catch((err)=>{
       alert(err.message);
@@ -25,6 +30,18 @@ function MyNavbar(props) {
 
   function handleRegister(email, pass){
     //first close the login modal, then pop the register modal, similar to login modal and handle the registration of user
+    setLogin(false);
+    setRegister(true);
+
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then((userCreds) => {
+      //Created
+      //refresh the page -- as of now
+      //add to localstorage
+      window.localStorage.setItem('currentUser', JSON.stringify(userCreds));
+      window.location.reload();
+    }).catch((err)=>{
+      alert(err.message);
+    });
   }
 
     return (
@@ -38,15 +55,22 @@ function MyNavbar(props) {
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
-      Signed in as: <a href="#login" onClick={handleShow}>{user ? (user.email): (<>Login</>)}</a>
+      Signed in as: <a href="#login" onClick={handleShow}>{user ? (user.user.email): (<>Login</>)}</a>
 
       <LoginModal
         show={login}
         handleClose={handleClose}
-        title={"Login"}
         handleLogin={handleLogin}
         handleRegister={handleRegister}
       />
+
+      <RegisterModal
+        show={register}
+        handleClose={handleClose}
+        handleLogin={handleLogin}
+        handleRegister={handleRegister}
+      />
+
 
     </Navbar.Text>
   </Navbar.Collapse>

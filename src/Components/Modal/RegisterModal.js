@@ -1,18 +1,18 @@
 import {Button, Modal, Form} from 'react-bootstrap';
 
-function LoginModal(props) { 
+function RegisterModal(props) { 
 
   function handleSubmit(event){
     event.preventDefault();
     //first, grab all the data and execute the parent element - navbar's method by passing email and pass
     const formData = new FormData(event.target);
-    props.handleLogin(formData.get('email'), formData.get('password'));
+    props.handleRegister(formData.get('email'), formData.get('password'));
   }
 
     return (
         <Modal show={props.show} onHide={props.handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
+            <Modal.Title>Register</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
@@ -29,21 +29,14 @@ function LoginModal(props) {
              </Form.Group>
 
              <Button variant="primary" type="submit" onClick={props.handleClose}>
-              Login
+              Register
             </Button>
 
 
           </Form>
           </Modal.Body>
-
-
-          <Modal.Footer>
-          <Button variant="info" onClick={props.handleRegister}>
-              New? Register.
-            </Button>
-          </Modal.Footer>
         </Modal>
     );
   }
 
-export default LoginModal;
+export default RegisterModal;
