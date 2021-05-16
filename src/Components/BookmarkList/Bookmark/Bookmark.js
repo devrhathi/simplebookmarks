@@ -3,7 +3,11 @@ import {Button, Collapse} from 'react-bootstrap';
 import classes from './Bookmark.module.css';
 import MyModal from '../../Modal/MyModal';
 
-function Bookmark() {
+function Bookmark(props) {
+    const title = props.title;
+    const url = props.url;
+    const desc = props.desc;
+
     const [open, setOpen] = useState(false);
     const [copy, setCopy] = useState('Copy');
     const [edit, setEdit] = useState(false);
@@ -31,12 +35,12 @@ function Bookmark() {
       >
           <div className={classes._Link}>
               <h3 onClick={()=> setOpen(!open)}>
-                  Google
+                  {title}
               </h3>
 
               <div className={classes._Url}>
               <h5 onClick={()=> setOpen(!open)}>
-                  https://www.google.com
+                  {url}
               </h5>
               <Button 
               onClick={copyHandler}
@@ -50,8 +54,8 @@ function Bookmark() {
 
           <Collapse in={open}>
               <div className={classes._Desc}>
-                  <p>Gotta go to this website and search why i am coding right now whats wrong with me lmfao idk what im doing with my life my brain hurts making this shit idk what to do next im typing fast as ... boiiiiiiiii</p>
-
+                  <p>{desc}</p>
+                  
                 <div className={classes._Buttons}>
                   <Button 
                     variant="primary" 

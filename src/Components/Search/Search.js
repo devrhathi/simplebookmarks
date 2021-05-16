@@ -8,6 +8,7 @@ import 'firebase/firestore';
 function Search(props) {
     const currentUser = props.user;
 
+
     const[add, setAdd] = useState(false);
 
     function handleShow(){setAdd(true)}
@@ -20,10 +21,15 @@ function Search(props) {
             "desc" : desc
         }
 
+        if(currentUser){
         const db = firebase.firestore();
-        db.collection(currentUser.user.uid).doc(url).set(dataToUpload)
+        db.collection(currentUser.uid).doc(url).set(dataToUpload)
         .then(()=>{alert('uploaded')})
-        .catch(err=>{alert('failed')});
+        .catch(err=>{alert(err.getMessage())});
+        }
+        else{
+            alert('error, not signed in');
+        }
 
     }
 

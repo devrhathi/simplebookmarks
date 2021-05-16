@@ -18,13 +18,10 @@ function MyNavbar(props) {
   function handleLogin(email, pass){
     //log user in, if failed, show failed modal
     firebase.auth().signInWithEmailAndPassword(email, pass).then((userCreds) => {
-      //Signed In
-      //refresh the page -- as of now
-      //put the data user in localstorage first
-      window.localStorage.setItem('currentUser', JSON.stringify(userCreds));
+      localStorage.setItem('currentUser', JSON.stringify(userCreds.user));
       window.location.reload();
     }).catch((err)=>{
-      alert(err.message);
+      console.log(err.message);
     });
   }
 
@@ -34,13 +31,10 @@ function MyNavbar(props) {
     setRegister(true);
 
     firebase.auth().createUserWithEmailAndPassword(email, pass).then((userCreds) => {
-      //Created
-      //refresh the page -- as of now
-      //add to localstorage
-      window.localStorage.setItem('currentUser', JSON.stringify(userCreds));
+      localStorage.setItem('currentUser', JSON.stringify( userCreds.user));
       window.location.reload();
     }).catch((err)=>{
-      alert(err.message);
+      console.log(err.message);
     });
   }
 
@@ -55,7 +49,7 @@ function MyNavbar(props) {
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
-      Signed in as: <a href="#login" onClick={handleShow}>{user ? (user.user.email): (<>Login</>)}</a>
+      Signed in as: <a href="#login" onClick={handleShow}>{user ? (user.email): (<>Login</>)}</a>
 
       <LoginModal
         show={login}

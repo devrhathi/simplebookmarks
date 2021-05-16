@@ -4,18 +4,23 @@ import Search from './Components/Search/Search';
 import firebase from './firebase';
 import 'firebase/auth';
 
-import Bookmark from './Components/BookmarkList/Bookmark/Bookmark';
-
+import BookmarkList from './Components/BookmarkList/BookmarkList';
 function App() {
+  // localStorage.clear();
   const [currentUser, setCurrentUser] = useState(null);
+
+
   useEffect(() => {
+    // localStorage.clear();
     //check if firebase has auth
     const user = localStorage.getItem('currentUser');
     if(user){
       setCurrentUser(JSON.parse(user));
     }
-  }, [])
+  }, []);
 
+  console.log('user passed is => ');
+  console.log(currentUser);
 
   return (
     <div className="app">
@@ -25,7 +30,9 @@ function App() {
       <Search
         user = {currentUser}
       />
-      <Bookmark/>
+      <BookmarkList
+        user = {currentUser}
+      />
     </div>
   )
 }
