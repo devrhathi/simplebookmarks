@@ -17,12 +17,10 @@ function BookmarkList(props) {
                 .then(querySnapshot => {
                     let bookmarks = querySnapshot.docs.map(doc => doc.data());
                     setBookmarkList(bookmarks);
-                    console.log(bookmarks);
-                    console.log('hey');
                 })
                     
         }
-    }, [])
+    }, [props.user])
 
     if(bookmarkList){
         bookmarkList.forEach((bookmark)=>{
@@ -37,10 +35,10 @@ function BookmarkList(props) {
         });
     }
 
-
+    console.log(bookmarksListToShow);
     return (
         <div>
-            {bookmarksListToShow}
+            {bookmarksListToShow.length > 0 ? bookmarksListToShow : (<h1 style={{textAlign:"center"}}>Loading...</h1>)}
         </div>
     )
 }
