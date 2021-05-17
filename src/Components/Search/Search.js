@@ -24,7 +24,7 @@ function Search(props) {
         if(currentUser){
         const db = firebase.firestore();
         db.collection(currentUser.uid).doc(url).set(dataToUpload)
-        .then(()=>{alert('uploaded')})
+        .then(()=>{window.location.reload()})
         .catch(err=>{alert(err.getMessage())});
         }
         else{

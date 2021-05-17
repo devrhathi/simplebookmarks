@@ -7,13 +7,11 @@ import 'firebase/auth';
 
 function BookmarkList(props) {
     const [bookmarkList, setBookmarkList] = useState();
-    const currentUser = props.user;
     const bookmarksListToShow = [];
 
     useEffect(() => {
-        if(currentUser){
-            console.log('hey')
-            firebase.firestore().collection(currentUser.uid).get()
+        if(props.user){
+            firebase.firestore().collection(props.user.uid).get()
                 .then(querySnapshot => {
                     let bookmarks = querySnapshot.docs.map(doc => doc.data());
                     setBookmarkList(bookmarks);

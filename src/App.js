@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MyNavbar from './Components/Navbar/MyNavbar';
 import Search from './Components/Search/Search';
-import firebase from './firebase';
-import 'firebase/auth';
 
 import BookmarkList from './Components/BookmarkList/BookmarkList';
 function App() {

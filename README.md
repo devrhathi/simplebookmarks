@@ -3,9 +3,10 @@
 - [x] Add register functionality
 - [x] Add New Button adds new data to firebase database
 - [x] Show the database data in the UI using useEffect
-- [ ] Make Copy Button Functional
-- [ ] Make delete Button delete the bookmark from database and UI
+- [x] Make Copy Button Functional
+- [x] Make delete Button delete the bookmark from database and UI
 - [ ] Fill edit modal with current data in input elements
 - [ ] Make Edit button modal edit and save new bookmark in database using UPDATE
 - [ ] Make search bar functional
 - [ ] show modal login to continue when website loads and if dismissed, show dummy placeholder UI
+- [ ] do all operations without reloading page (needs refractoring and logic alteration for state management)

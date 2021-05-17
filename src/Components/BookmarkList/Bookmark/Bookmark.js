@@ -3,6 +3,10 @@ import {Button, Collapse} from 'react-bootstrap';
 import classes from './Bookmark.module.css';
 import MyModal from '../../Modal/MyModal';
 
+import firebase from '../../../firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+
 function Bookmark(props) {
     const title = props.title;
     const url = props.url;
@@ -13,13 +17,19 @@ function Bookmark(props) {
     const [edit, setEdit] = useState(false);
 
     function copyHandler(){
-      navigator.clipboard.writeText('yo man sup');
+      navigator.clipboard.writeText(url);
       setCopy('Copied!');
 
       setTimeout(copiedHandler, 2000);
     }
 
     function copiedHandler(){setCopy('Copy');}
+
+    function deleteHandler(){
+      //delete the field which has url of current from db
+      firebase.firestore().collection(firebase.auth().currentUser.uid).doc(url).delete()
+      .then(()=>{window.location.reload()})
+    }
 
     function handleShow(){
       setEdit(true);
@@ -64,7 +74,11 @@ function Bookmark(props) {
                     >Edit
                     </Button>
 
-                  <Button variant="danger" className={classes._deleteBtn}>Delete</Button>
+                  <Button 
+                    variant="danger" 
+                    className={classes._deleteBtn}
+                    onClick={deleteHandler}
+                    >Delete</Button>
                 </div>
               </div>
           </Collapse>
