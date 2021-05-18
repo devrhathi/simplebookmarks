@@ -10,15 +10,25 @@ function BookmarkList(props) {
     const bookmarksListToShow = [];
 
     useEffect(() => {
-        if(props.user){
-            firebase.firestore().collection(props.user.uid).get()
-                .then(querySnapshot => {
-                    let bookmarks = querySnapshot.docs.map(doc => doc.data());
-                    setBookmarkList(bookmarks);
-                })
+        let detatchListener;
+        if (props.user){
+        detatchListener = firebase.firestore().collection(props.user.uid).onSnapshot(querySnapshot => {
+            let bookmarks = querySnapshot.docs.map(doc => doc.data());
+            setBookmarkList(bookmarks);
+        });
+    }
+    return detatchListener;
+}, [props.user]);
+
+
+        // if(props.user){
+        //     firebase.firestore().collection(props.user.uid).get()
+        //         .then(querySnapshot => {
+        //             let bookmarks = querySnapshot.docs.map(doc => doc.data());
+        //             setBookmarkList(bookmarks);
+        //         })
                     
-        }
-    }, [props.user])
+        // }
 
     if(bookmarkList){
         bookmarkList.forEach((bookmark)=>{

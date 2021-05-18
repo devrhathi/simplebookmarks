@@ -23,8 +23,8 @@ function Search(props) {
 
         if(currentUser){
         const db = firebase.firestore();
-        db.collection(currentUser.uid).doc(url).set(dataToUpload)
-        .then(()=>{window.location.reload()})
+        db.collection(currentUser.uid).doc(title).set(dataToUpload)
+        .then(()=>{console.log('Added a New Bookmark');})
         .catch(err=>{alert(err.getMessage())});
         }
         else{

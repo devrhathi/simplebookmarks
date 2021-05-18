@@ -27,8 +27,8 @@ function Bookmark(props) {
 
     function deleteHandler(){
       //delete the field which has url of current from db
-      firebase.firestore().collection(firebase.auth().currentUser.uid).doc(url).delete()
-      .then(()=>{window.location.reload()})
+      firebase.firestore().collection(firebase.auth().currentUser.uid).doc(title).delete()
+      .then(()=>{console.log('Deleted Bookmark')})
     }
 
     function handleShow(){
