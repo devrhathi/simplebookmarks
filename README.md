@@ -1,11 +1,10 @@
 # SimpleBookmarks
 
-    - Storing bookmarks on a Web Browser doesn't allow users to also add a task, that is well shown in the UI, This app allows users to do it.
-    - Its made for learning purposes, still in development and optimization is not done yet.
+    Storing bookmarks on a Web Browser doesn't allow users to also add a task, that is well shown in the UI, This app allows users to do it. Its made for learning purposes, still in development and optimization is not done yet.
 
 # Demo
 
-    ![demo](https://user-images.githubusercontent.com/68689014/118775420-8b879d00-b8a4-11eb-9568-e27d3420aa69.gif)
+![demo](https://user-images.githubusercontent.com/68689014/118775420-8b879d00-b8a4-11eb-9568-e27d3420aa69.gif)
 
 # Tasks:
 
