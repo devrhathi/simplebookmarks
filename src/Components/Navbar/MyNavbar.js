@@ -5,16 +5,13 @@ import LoginModal from "../Modal/LoginModal";
 import RegisterModal from "../Modal/RegisterModal";
 import "firebase/auth";
 import firebase from "../../firebase";
+import "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { setAuth } from "../../Redux/Actions";
 
-//redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { authLogin } from "../../Redux/Actions";
-
-function MyNavbar(props) {
-  const user = props.user;
-  //redux
-  // const auth = useSelector((state) => state);
-  // const dispatch = useDispatch();
+function MyNavbar() {
+  const user = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
@@ -26,49 +23,41 @@ function MyNavbar(props) {
     setRegister(false);
   }
 
-  function handleLogin(email, pass) {
-    //first, check if redux is working
-    // dispatch(authLogin(email, pass));
-
-    //log user in, if failed, show failed modal
+  function handleLogin(email, password) {
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, pass)
-      .then((userCreds) => {
-        localStorage.setItem("currentUser", JSON.stringify(userCreds.user));
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err.message);
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        localStorage.setItem("currentUser", JSON.stringify(user.user));
+
+        dispatch(setAuth(user.user));
       });
   }
 
-  function handleRegister(email, pass) {
-    //first close the login modal, then pop the register modal, similar to login modal and handle the registration of user
+  function handleRegister(email, password) {
     setLogin(false);
     setRegister(true);
 
+    //redux
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, pass)
-      .then((userCreds) => {
-        localStorage.setItem("currentUser", JSON.stringify(userCreds.user));
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err.message);
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        localStorage.setItem("currentUser", JSON.stringify(user.user));
+
+        dispatch(setAuth(user.user));
       });
   }
 
   return (
     <div className="_Navbar">
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Hello.</Navbar.Brand>
+        <Navbar.Brand>Hello.</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             Signed in as:{" "}
-            <a href="#login" onClick={handleShow}>
+            <a href="#" onClick={handleShow}>
               {user ? user.email : <>Login</>}
             </a>
             <LoginModal

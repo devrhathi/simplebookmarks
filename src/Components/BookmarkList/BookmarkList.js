@@ -1,54 +1,55 @@
-import {useEffect, useState} from 'react';
-import Bookmark from './Bookmark/Bookmark';
+import { useEffect, useState } from "react";
+import Bookmark from "./Bookmark/Bookmark";
+import firebase from "../../firebase";
+import "firebase/firestore";
+import "firebase/auth";
+import { useSelector } from "react-redux";
 
-import firebase from '../../firebase';
-import 'firebase/firestore';
-import 'firebase/auth';
+function BookmarkList() {
+  const currentUser = useSelector((state) => state);
 
-function BookmarkList(props) {
-    const [bookmarkList, setBookmarkList] = useState();
-    const bookmarksListToShow = [];
+  const [bookmarkList, setBookmarkList] = useState();
+  const bookmarksListToShow = [];
 
-    useEffect(() => {
-        let detatchListener;
-        if (props.user){
-        detatchListener = firebase.firestore().collection(props.user.uid).onSnapshot(querySnapshot => {
-            let bookmarks = querySnapshot.docs.map(doc => doc.data());
-            setBookmarkList(bookmarks);
+  console.log("re rendered bookmarklist, auth is");
+  console.log(currentUser);
+
+  useEffect(() => {
+    let detatchListener;
+    if (currentUser) {
+      detatchListener = firebase
+        .firestore()
+        .collection(currentUser.uid)
+        .onSnapshot((querySnapshot) => {
+          let bookmarks = querySnapshot.docs.map((doc) => doc.data());
+          setBookmarkList(bookmarks);
         });
     }
     return detatchListener;
-}, [props.user]);
+  }, [currentUser]);
 
+  if (bookmarkList) {
+    bookmarkList.forEach((bookmark) => {
+      bookmarksListToShow.push(
+        <Bookmark
+          key={bookmark.url}
+          title={bookmark.title}
+          url={bookmark.url}
+          desc={bookmark.desc}
+        />
+      );
+    });
+  }
 
-        // if(props.user){
-        //     firebase.firestore().collection(props.user.uid).get()
-        //         .then(querySnapshot => {
-        //             let bookmarks = querySnapshot.docs.map(doc => doc.data());
-        //             setBookmarkList(bookmarks);
-        //         })
-                    
-        // }
-
-    if(bookmarkList){
-        bookmarkList.forEach((bookmark)=>{
-            bookmarksListToShow.push(
-                (<Bookmark
-                    key={bookmark.url}
-                    title={bookmark.title}
-                    url={bookmark.url}
-                    desc={bookmark.desc}
-                    />)
-            );
-        });
-    }
-
-    console.log(bookmarksListToShow);
-    return (
-        <div>
-            {bookmarksListToShow.length > 0 ? bookmarksListToShow : (<h1 style={{textAlign:"center"}}>Loading...</h1>)}
-        </div>
-    )
+  return (
+    <div>
+      {bookmarksListToShow.length > 0 ? (
+        bookmarksListToShow
+      ) : (
+        <h1 style={{ textAlign: "center" }}>Loading...</h1>
+      )}
+    </div>
+  );
 }
 
-export default BookmarkList
+export default BookmarkList;

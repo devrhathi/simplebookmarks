@@ -14,6 +14,7 @@
 - [x] Show the database data in the UI using useEffect
 - [x] Make Copy Button Functional
 - [x] Make delete Button delete the bookmark from database and UI
+- [x] Migrate Global Auth State to Redux
 - [ ] Fill edit modal with current data in input elements
 - [ ] Make Edit button modal edit and save new bookmark in database using UPDATE
 - [ ] Make search bar functional

@@ -5,8 +5,10 @@ import MyModal from "../Modal/MyModal";
 import firebase from "../../firebase";
 import "firebase/firestore";
 
-function Search(props) {
-  const currentUser = props.user;
+import { useSelector } from "react-redux";
+
+function Search() {
+  const currentUser = useSelector((state) => state);
 
   const [add, setAdd] = useState(false);
 
