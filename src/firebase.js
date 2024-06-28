@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBrWd7_7EGI2zy58Fbibm9lIWN77SrRw5o",
+    apiKey: "",
     authDomain: "simplebookmarks-8a4f3.firebaseapp.com",
     projectId: "simplebookmarks-8a4f3",
     storageBucket: "simplebookmarks-8a4f3.appspot.com",
